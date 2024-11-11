@@ -1,0 +1,50 @@
+:root {
+  --primaryColor: #0f67b1;
+  --black: #000;
+  --textColor: #f4f6ff;
+}
+
+#loginForm {
+  width: 30rem;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  background-color: var(--textColor);
+}
+
+#loginForm label {
+  font-size: 1.5rem;
+}
+
+#loginForm input {
+  display: block;
+  padding: 1rem;
+  font-size: 1rem;
+  margin: auto;
+  width: 100%;
+  margin-bottom: 2rem;
+  margin-top: 0.3rem;
+  border: 1px solid var(--black);
+  outline-color: var(--primaryColor);
+}
+
+#loginBtn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  background-color: var(--primaryColor);
+  color: var(--textColor);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#loginForm p {
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+#loginLink {
+  color: var(--primaryColor);
+}
