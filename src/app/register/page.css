@@ -1,13 +1,12 @@
 #logStatusTxt {
-    font-size: 3rem;
-    text-align: center;
-    color: #f4f6ff;
-    margin-top: 3vh;
-  }
-  #loginContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
-  }
-  
+  font-size: 3rem;
+  text-align: center;
+  color: #f4f6ff;
+  margin-top: 3vh;
+}
+#loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}

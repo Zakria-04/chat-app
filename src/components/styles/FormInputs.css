@@ -1,5 +1,5 @@
 :root {
-  --primaryColor: #0f67b1;
+  --primary-color: #0f67b1;
   --black: #000;
   --textColor: #f4f6ff;
 }
@@ -24,7 +24,7 @@
   margin-bottom: 2rem;
   margin-top: 0.3rem;
   border: 1px solid var(--black);
-  outline-color: var(--primaryColor);
+  outline-color: #0f67b1;
 }
 
 #loginBtn {
@@ -33,10 +33,14 @@
   border: none;
   margin-top: 1.5rem;
   font-size: 1.5rem;
-  background-color: var(--primaryColor);
+  background-color: #0f67b1;
   color: var(--textColor);
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+#loginBtn:disabled {
+  cursor: not-allowed;
 }
 
 #loginForm p {
@@ -46,5 +50,5 @@
 }
 
 #loginLink {
-  color: var(--primaryColor);
+  color: #0f67b1;
 }

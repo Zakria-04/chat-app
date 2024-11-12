@@ -2,7 +2,7 @@ import "./page.css";
 import FormInput from "@/components/FormInput";
 import React from "react";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <p id="logStatusTxt">Login</p>
@@ -13,4 +13,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

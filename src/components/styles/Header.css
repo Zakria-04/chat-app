@@ -1,0 +1,19 @@
+:root {
+  --primaryColor: #f4f6ff;
+}
+
+#headerContainer {
+  background-color: var(--primaryColor);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+#greetingTxt {
+  font-size: 12px;
+}
+
+#userName {
+  font-size: 17px;
+}
