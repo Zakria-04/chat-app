@@ -1,0 +1,69 @@
+:root {
+  --online: #9edf9c;
+  --away: #c5d3e8;
+}
+
+#account-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0.3rem;
+  margin-top: 2rem;
+}
+
+#account-nav label {
+  font-size: 16px;
+}
+
+#account-nav select {
+  border: none;
+  outline: none;
+}
+
+#account-nav label {
+  margin-right: 0.5rem;
+}
+
+.status {
+  border: 1px solid none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.online {
+  background-color: var(--online);
+}
+
+.away {
+  background-color: var(--away);
+}
+
+.account-status {
+  font-size: 14px;
+  margin-left: 0.3rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 800px) {
+  #account-nav label {
+    font-size: 1.6rem;
+  }
+
+  #account-nav select {
+    font-size: 1.6rem;
+  }
+
+  #account-nav option {
+    font-size: 0.8rem;
+  }
+
+  .account-status {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .status {
+    padding: 0.8rem;
+  }
+}

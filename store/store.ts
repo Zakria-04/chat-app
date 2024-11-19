@@ -2,10 +2,16 @@ import {
   CheckIfServerLive,
   createNewUserFromAPI,
   loginUserFromAPI,
+  updateUserData,
 } from "@/res/api";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { UserDataType, UserLoginProps } from "./type";
+import {
+  UpdatedData,
+  UpdateUserDataType,
+  UserDataType,
+  UserLoginProps,
+} from "./type";
 
 type StoreData = {
   //* store
@@ -21,6 +27,7 @@ type StoreData = {
   checkIfServerLiveFromAPI: () => Promise<void>;
   createNewUserToDB: (blog: UserLoginProps) => Promise<void>;
   loginUserFromDB: (blog: UserLoginProps) => Promise<void>;
+  handleUpdatedForm: (blog: UpdatedData) => Promise<void>;
 };
 
 export const useStore = create<StoreData>()(
@@ -76,6 +83,21 @@ export const useStore = create<StoreData>()(
         } catch (error) {
           set({ isLoading: false, error: "error on login user" });
           console.error("errorMessage", error);
+        }
+      },
+
+      // handle updated form
+      handleUpdatedForm: async (body) => {
+        console.log("user is", body);
+
+        set({ isLoading: true, error: null });
+        try {
+          const response = await updateUserData(body);
+          set({ isLoading: false, user: response.user });
+          console.log("user has been updated successfully");
+        } catch (error) {
+          set({ isLoading: false, error: "error on update user data" });
+          console.error("error ", error);
         }
       },
     }),

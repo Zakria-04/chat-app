@@ -12,4 +12,17 @@ export type UserDataType = {
   email: string;
   __v: number;
   _id: string;
+  status: string;
+};
+
+export type UpdateUserDataType = {
+  userName: string;
+  userPass: string;
+  email: string;
+};
+
+export type UpdatedData = {
+  _id: string | null;
+  password: string;
+  updatedData: UpdateUserDataType;
 };

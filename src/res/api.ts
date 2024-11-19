@@ -1,5 +1,9 @@
 import axios from "axios";
-import { UserLoginProps } from "../../store/type";
+import {
+  UpdatedData,
+  UpdateUserDataType,
+  UserLoginProps,
+} from "../../store/type";
 
 const MainUrl = "https://chat-server-btsf.onrender.com";
 
@@ -18,16 +22,21 @@ const loginUserFromAPI = (body: UserLoginProps) => {
   return appFetch(route, "POST", body);
 };
 
+const updateUserData = (body: UpdatedData) => {
+  const route = "/update_profile";
+  return appFetch(route, "POST", body);
+};
+
 const appFetch = async (
   route: string,
-  method: "GET" | "POST",
-  body?: UserLoginProps
+  method: "GET" | "POST" | "PATCH",
+  body?: UserLoginProps | UpdateUserDataType | UpdatedData
 ) => {
   try {
     const response = await axios({
       method: method,
       url: MainUrl + route,
-      data: method === "POST" ? body : null,
+      data: method !== "GET" ? body : null,
     });
 
     return response.data;
@@ -37,4 +46,9 @@ const appFetch = async (
   }
 };
 
-export { CheckIfServerLive, createNewUserFromAPI, loginUserFromAPI };
+export {
+  CheckIfServerLive,
+  createNewUserFromAPI,
+  loginUserFromAPI,
+  updateUserData,
+};
