@@ -37,7 +37,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--primary-color);
+  background-color: #f4f6ff;
   padding: 1.5rem;
   border-radius: 3rem;
 }
