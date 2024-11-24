@@ -42,4 +42,17 @@
   body {
     padding: 1rem;
   }
+
+  #greetingTxt {
+    font-size: 1rem;
+  }
+
+  #userName {
+    font-size: 1.8rem;
+  }
+
+  .profile-img {
+    width: 4rem;
+    height: 4rem;
+  }
 }

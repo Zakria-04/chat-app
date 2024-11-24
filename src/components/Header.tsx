@@ -1,32 +1,54 @@
 "use client";
 import "./styles/Header.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStore } from "../../store/store";
-import { io } from "socket.io-client";
 import ProfileNav from "./ProfileNav";
-import EditForm from "./EditForm";
 import Image from "next/image";
-import profile from "../assets/images/user.png";
+import { initializeSocket } from "@/res/socket";
+import { MainDomain } from "@/res/domains";
 
 const Header = () => {
-  const { user } = useStore();
-
+  const { user, getProfileAvatars, updateUserStatus } = useStore();
   const [isOpen, setIsOpen] = useState(false);
+  const [connected, setIsConnected] = useState(false);
+
+  const socket = initializeSocket(MainDomain);
+
+  // check if user is connected to the server
+  socket.on("connect", () => {
+    // console.log(`socket connected: ${socket.connected}`);
+    if (user?._id) {
+      // Emit the user's _id when connected
+      socket.emit("active", user._id);
+
+      if (socket.connected) {
+        setIsConnected(true);
+      } else {
+        setIsConnected(false);
+      }
+    } else {
+      console.warn("User ID is not available for socket emission.");
+    }
+  });
+
+  socket.on("disconnect", () => {
+    console.log("socket disconnected");
+  });
+
+  useEffect(() => {
+    if (connected) {
+      updateUserStatus(user?._id, "online");
+    }
+  }, [connected]);
+
+  // get avatars on mount
+  useEffect(() => {
+    getProfileAvatars();
+  }, [getProfileAvatars]);
 
   const toggleNav = () => {
     setIsOpen(!isOpen);
   };
-
-  // const socket = io("http://localhost:8080");
-  const socket = io("https://chat-server-btsf.onrender.com");
-
-  socket.on("connect", () => {
-    // check if socket is connected
-    console.log(`socket connected ${socket.connected}`);
-
-    // send the _id from user mongoDB
-    socket.emit("active", user?._id);
-  });
 
   return (
     <div id="headerContainer">
@@ -40,9 +62,14 @@ const Header = () => {
       </div>
       <Image
         onClick={toggleNav}
-        src={profile}
+        src={
+          user?.profileImg ||
+          "https://res.cloudinary.com/dvvm7u4dh/image/upload/v1732177776/wizard_4472179_fvv4gr.png"
+        }
         alt="profile"
         className="profile-img"
+        width={200}
+        height={200}
       />
       <ProfileNav isOpen={isOpen} toggleNav={toggleNav} />
     </div>

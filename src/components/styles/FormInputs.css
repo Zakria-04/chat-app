@@ -52,3 +52,22 @@
 #loginLink {
   color: #0f67b1;
 }
+
+@media (min-width: 800px) {
+  #loginForm {
+    width: 40rem;
+    padding: 2rem;
+  }
+
+  #loginForm label {
+    font-size: 2rem;
+  }
+
+  #loginForm input {
+    font-size: 1.3rem;
+  }
+
+  #loginForm p {
+    font-size: 2rem;
+  }
+}

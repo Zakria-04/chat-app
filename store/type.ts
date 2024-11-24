@@ -13,6 +13,7 @@ export type UserDataType = {
   __v: number;
   _id: string;
   status: string;
+  profileImg: string;
 };
 
 export type UpdateUserDataType = {
@@ -25,4 +26,9 @@ export type UpdatedData = {
   _id: string | null;
   password: string;
   updatedData: UpdateUserDataType;
+};
+
+export type UpdateProfileImgType = {
+  _id: string;
+  profileImg: string;
 };

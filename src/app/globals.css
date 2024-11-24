@@ -24,4 +24,5 @@ body {
   text-align: center;
   color: var(--primaryColor);
   margin-top: 5vh;
+  z-index: 1;
 }

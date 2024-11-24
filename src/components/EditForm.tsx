@@ -56,13 +56,17 @@ const EditForm = () => {
         <input
           type="text"
           value={updateUserForm.userName}
-          onChange={(e) => handleUpdateForm("userName", e.target.value)}
+          onChange={(e) =>
+            handleUpdateForm("userName", e.target.value.toLocaleLowerCase())
+          }
         />
         <label>Email</label>
         <input
-          type="text"
+          type="email"
           value={updateUserForm.email}
-          onChange={(e) => handleUpdateForm("email", e.target.value)}
+          onChange={(e) =>
+            handleUpdateForm("email", e.target.value.toLocaleLowerCase())
+          }
         />
         <label>New Password</label>
         <input
@@ -76,6 +80,7 @@ const EditForm = () => {
           placeholder="enter your current password for confirmation"
           onChange={(e) => (password.current = e.target.value)}
           required
+          title="please enter your password"
         />
         <button>save</button>
       </form>

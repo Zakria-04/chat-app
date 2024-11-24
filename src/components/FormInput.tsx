@@ -58,7 +58,10 @@ const FormInput: React.FC<FormInputProps> = ({ logStatus }) => {
         <label>{logStatusMsgRender("UserName or Email", "UserName")}</label>
         <input
           type="text"
-          onChange={(e) => handleInputChange("userName", e.target.value)}
+          onChange={(e) =>
+            handleInputChange("userName", e.target.value.toLocaleLowerCase())
+          }
+          required
         />
         {logStatus === "register" && (
           <>
@@ -66,7 +69,7 @@ const FormInput: React.FC<FormInputProps> = ({ logStatus }) => {
             <input
               type="text"
               onChange={(e) => {
-                handleInputChange("email", e.target.value);
+                handleInputChange("email", e.target.value.toLocaleLowerCase());
               }}
             />
           </>
@@ -75,6 +78,7 @@ const FormInput: React.FC<FormInputProps> = ({ logStatus }) => {
         <input
           type="password"
           onChange={(e) => handleInputChange("userPass", e.target.value)}
+          required
         />
         <button disabled={isLoading ? true : false} id="loginBtn">
           {logStatusMsgRender("Login", "Create New Account")}

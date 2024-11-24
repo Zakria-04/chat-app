@@ -1,11 +1,11 @@
 import axios from "axios";
 import {
   UpdatedData,
+  UpdateProfileImgType,
   UpdateUserDataType,
   UserLoginProps,
 } from "../../store/type";
-
-const MainUrl = "https://chat-server-btsf.onrender.com";
+import { MainDomain } from "./domains";
 
 const CheckIfServerLive = () => {
   const route = "/live";
@@ -24,24 +24,38 @@ const loginUserFromAPI = (body: UserLoginProps) => {
 
 const updateUserData = (body: UpdatedData) => {
   const route = "/update_profile";
-  return appFetch(route, "POST", body);
+  return appFetch(route, "PATCH", body);
+};
+
+const getProfileImageFromDB = () => {
+  const route = "/get_profile_images";
+  return appFetch(route, "GET");
+};
+
+const updateUserProfileImage = (body: UpdateProfileImgType) => {
+  const route = "/update_profile_img";
+  return appFetch(route, "PATCH", body);
 };
 
 const appFetch = async (
   route: string,
   method: "GET" | "POST" | "PATCH",
-  body?: UserLoginProps | UpdateUserDataType | UpdatedData
+  body?:
+    | UserLoginProps
+    | UpdateUserDataType
+    | UpdatedData
+    | UpdateProfileImgType
 ) => {
   try {
     const response = await axios({
       method: method,
-      url: MainUrl + route,
+      url: MainDomain + route,
       data: method !== "GET" ? body : null,
     });
 
     return response.data;
   } catch (error) {
-    console.error(`Error on fetching the route, ${route} `, error);
+    console.error(`Error on fetching the route, ${route}`, error);
     return null;
   }
 };
@@ -51,4 +65,6 @@ export {
   createNewUserFromAPI,
   loginUserFromAPI,
   updateUserData,
+  getProfileImageFromDB,
+  updateUserProfileImage,
 };

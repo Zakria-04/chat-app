@@ -1,8 +1,10 @@
 import {
   CheckIfServerLive,
   createNewUserFromAPI,
+  getProfileImageFromDB,
   loginUserFromAPI,
   updateUserData,
+  updateUserProfileImage,
 } from "@/res/api";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
@@ -12,12 +14,15 @@ import {
   UserDataType,
   UserLoginProps,
 } from "./type";
+import { updateStatus } from "@/res/socket";
+import { produce } from "immer";
 
 type StoreData = {
   //* store
   error: null | string;
   isLoading: boolean;
   live: boolean;
+  avatar: Array<string>;
 
   //* user
   auth: boolean;
@@ -28,6 +33,13 @@ type StoreData = {
   createNewUserToDB: (blog: UserLoginProps) => Promise<void>;
   loginUserFromDB: (blog: UserLoginProps) => Promise<void>;
   handleUpdatedForm: (blog: UpdatedData) => Promise<void>;
+  updateUserStatus: (
+    id: string | undefined,
+    status: string | undefined
+  ) => void;
+  getProfileAvatars: () => void;
+  updateAvatar: (avatar: { _id: string; profileImg: string }) => void;
+  signoutUser: () => void;
 };
 
 export const useStore = create<StoreData>()(
@@ -37,6 +49,7 @@ export const useStore = create<StoreData>()(
       isLoading: false,
       error: null,
       live: false,
+      avatar: [],
 
       //* user
       auth: false,
@@ -88,8 +101,6 @@ export const useStore = create<StoreData>()(
 
       // handle updated form
       handleUpdatedForm: async (body) => {
-        console.log("user is", body);
-
         set({ isLoading: true, error: null });
         try {
           const response = await updateUserData(body);
@@ -97,13 +108,58 @@ export const useStore = create<StoreData>()(
           console.log("user has been updated successfully");
         } catch (error) {
           set({ isLoading: false, error: "error on update user data" });
+        }
+      },
+
+      // handle user updated status
+      updateUserStatus: (id, status) => {
+        set(
+          produce((state: StoreData) => {
+            if (state.user) {
+              updateStatus(id, status);
+              state.user.status = status as string;
+            }
+          })
+        );
+      },
+
+      // fetch profile images from server
+      getProfileAvatars: async () => {
+        set({ error: null });
+        try {
+          const data = await getProfileImageFromDB();
+          set({ avatar: data });
+        } catch (error) {
+          set({ error: "error on update user data" });
           console.error("error ", error);
         }
+      },
+
+      // change avatar image
+      updateAvatar: async (body) => {
+        set({ isLoading: true, error: null });
+        try {
+          const response = await updateUserProfileImage(body);
+          set({ isLoading: false, error: null, user: response.response });
+          console.log("user profile image has been updated successfully");
+        } catch (error) {
+          set({ isLoading: false, error: "password is not valid" });
+          console.error("error", error);
+        }
+      },
+
+      signoutUser: () => {
+        set({ user: null, auth: false, error: null });
       },
     }),
     {
       name: "chat_user_storage",
       storage: createJSONStorage(() => localStorage),
+      partialize(state) {
+        // what not to show on local storage
+        const { avatar, ...rest } = state;
+        return rest;
+      },
     }
   )
 );
