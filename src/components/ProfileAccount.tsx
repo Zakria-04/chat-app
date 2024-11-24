@@ -6,6 +6,7 @@ const ProfileAccount = () => {
   const { user, updateUserStatus } = useStore();
   const [status, setStatus] = useState(user?.status);
 
+
   useEffect(() => {
     if (user?.status) {
       setStatus(user.status);
@@ -42,8 +43,8 @@ const ProfileAccount = () => {
         ></div>
       </div>
       <p className="account-status">
-        You can set your availability status to Online or Away, allowing
-        others to see whether you are currently available.
+        You can set your availability status to Online or Away, allowing others
+        to see whether you are currently available.
       </p>
     </div>
   );

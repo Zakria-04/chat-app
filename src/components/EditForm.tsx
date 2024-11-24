@@ -44,8 +44,6 @@ const EditForm = () => {
       updatedData: updateUserForm,
     };
 
-    console.log(blog);
-
     return await handleUpdatedForm(blog);
   };
 

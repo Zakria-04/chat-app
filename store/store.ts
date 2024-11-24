@@ -144,7 +144,7 @@ export const useStore = create<StoreData>()(
           console.log("user profile image has been updated successfully");
         } catch (error) {
           set({ isLoading: false, error: "password is not valid" });
-          console.error("error", error);
+          // console.error("error", error);
         }
       },
 

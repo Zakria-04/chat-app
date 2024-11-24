@@ -37,7 +37,9 @@ const Header = () => {
 
   useEffect(() => {
     if (connected) {
-      updateUserStatus(user?._id, "online");
+      if (user?.status !== "away") {
+        updateUserStatus(user?._id, "online");
+      }
     }
   }, [connected]);
 
