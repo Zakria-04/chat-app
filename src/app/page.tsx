@@ -21,8 +21,8 @@ const Page = () => {
   return (
     <>
       <div id="authorize_details">
-        <h1>Chat-App</h1>
-        <p>by zakaria</p>
+        <h1 id="authorize_msg">Chat-App</h1>
+        <p id="authorize_msg">by zakaria</p>
       </div>
       {isLoading && <LoadingItem />}
     </>

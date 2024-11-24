@@ -71,3 +71,9 @@
     font-size: 2rem;
   }
 }
+
+@media (min-width: 1000px) {
+  #loginForm p {
+    font-size: 1.5rem;
+  }
+}
