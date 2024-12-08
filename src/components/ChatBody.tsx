@@ -35,10 +35,16 @@ const ChatBody = () => {
       </Link> */}
       {chats.map((chat: any) => (
         <Link
+          style={{ textDecoration: "none" }}
           key={chat._id}
           href={{
             pathname: "/messages",
-            query: { chatID: chat?.chatID, userID: user?._id },
+            query: {
+              chatID: chat?.chatID,
+              userID: user?._id,
+              chatProfile: chat.chatProfile,
+              chatName: chat.chatName,
+            },
           }}
         >
           <div id={styles.chatsContainer}>

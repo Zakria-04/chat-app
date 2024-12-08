@@ -25,3 +25,7 @@ export const renderUserChatMessages = (userID: string | undefined) => {
 export const getTest = () => {
   return socket
 }
+
+export const getMessages = () => {
+  return socket
+}

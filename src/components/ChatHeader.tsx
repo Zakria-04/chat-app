@@ -11,13 +11,19 @@ import { MainDomain } from "@/res/domains";
 interface ChatHeaderParams {
   userID: string;
   chatID: string;
+  chatName: string;
+  chatProfile: string;
 }
 
-const ChatHeader: React.FC<ChatHeaderParams> = ({ chatID, userID }) => {
+const ChatHeader: React.FC<ChatHeaderParams> = ({
+  chatID,
+  userID,
+  chatName,
+  chatProfile,
+}) => {
   const socket = initializeSocket(MainDomain);
 
   console.log(socket.connected);
-  
 
   useEffect(() => {
     console.log("hr");
@@ -28,6 +34,8 @@ const ChatHeader: React.FC<ChatHeaderParams> = ({ chatID, userID }) => {
       <Link href={"/home"}>
         <Image src={backBtn} alt="back-btn" className={styles.backBtn} />
       </Link>
+      <Image src={chatProfile} alt="chat profile" width={40} height={40} />
+      <p>{chatName}</p>
     </div>
   );
 };

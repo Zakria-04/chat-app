@@ -1,0 +1,16 @@
+.MessageInputContainer {
+  position: absolute;
+  bottom: 0;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.messageInput {
+  padding: 0.8rem;
+  width: 75vw;
+}

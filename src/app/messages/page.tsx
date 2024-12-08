@@ -1,14 +1,17 @@
 import { getUserChatFromDB } from "@/res/api";
 import axios from "axios";
-// import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import ChatHeader from "@/components/ChatHeader";
 import { initializeSocket } from "@/res/socket";
 import { MainDomain } from "@/res/domains";
+import MessageBody from "@/components/MessageBody";
+import MessageInput from "@/components/MessageInput";
 
 interface SearchParams {
   userID: string;
   chatID: string;
+  chatName: string;
+  chatProfile: string;
 }
 
 interface MessageParams {
@@ -43,12 +46,23 @@ const page: React.FC<MessageParams> = ({ searchParams }) => {
 
   return (
     <>
-      <ChatHeader chatID={searchParams.chatID} userID={searchParams.userID} />
+      <ChatHeader
+        chatID={searchParams.chatID}
+        userID={searchParams.userID}
+        chatName={searchParams.chatName}
+        chatProfile={searchParams.chatProfile}
+      />
       {/* {chat.map((chat: any) => (
         <div className={styles.chatContainer}>
           <p id={styles.message}>{chat.message}</p>
         </div>
       ))} */}
+      <MessageBody
+        chatID={searchParams.chatID}
+        userID={searchParams.userID}
+        chatName={searchParams.chatName}
+      />
+      <MessageInput />
     </>
   );
 };
