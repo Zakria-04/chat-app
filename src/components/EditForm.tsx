@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef, useState } from "react";
 import "./styles/EditForm.css";
 import { useStore } from "../../store/store";

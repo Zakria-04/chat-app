@@ -1,5 +1,6 @@
 import {
   CheckIfServerLive,
+  createNewUserChat,
   createNewUserFromAPI,
   getProfileImageFromDB,
   loginUserFromAPI,
@@ -27,6 +28,7 @@ type StoreData = {
   //* user
   auth: boolean;
   user: null | UserDataType;
+  chats: any;
 
   //* functions
   checkIfServerLiveFromAPI: () => Promise<void>;
@@ -40,6 +42,8 @@ type StoreData = {
   getProfileAvatars: () => void;
   updateAvatar: (avatar: { _id: string; profileImg: string }) => void;
   signoutUser: () => void;
+  userChats: (chats: any) => void;
+  createChat: (body: any) => Promise<void>;
 };
 
 export const useStore = create<StoreData>()(
@@ -54,6 +58,7 @@ export const useStore = create<StoreData>()(
       //* user
       auth: false,
       user: null,
+      chats: [],
 
       //* functions
 
@@ -148,8 +153,21 @@ export const useStore = create<StoreData>()(
         }
       },
 
+      // sign out the user
       signoutUser: () => {
         set({ user: null, auth: false, error: null });
+      },
+
+      // store user chats
+      userChats: (chats) => {
+        set({ chats });
+      },
+
+      // create new user chat
+      createChat: async (body) => {
+        try {
+          const response = await createNewUserChat(body);
+        } catch (error) {}
       },
     }),
     {

@@ -37,6 +37,16 @@ const updateUserProfileImage = (body: UpdateProfileImgType) => {
   return appFetch(route, "PATCH", body);
 };
 
+const getUserChatFromDB = (body: any) => {
+  const route = "/get_user_chat";
+  return appFetch(route, "POST", body);
+};
+
+const createNewUserChat = (body: any) => {
+  const route = "/create_new_chat";
+  return appFetch(route, "POST", body);
+};
+
 const appFetch = async (
   route: string,
   method: "GET" | "POST" | "PATCH",
@@ -67,4 +77,6 @@ export {
   updateUserData,
   getProfileImageFromDB,
   updateUserProfileImage,
+  getUserChatFromDB,
+  createNewUserChat
 };

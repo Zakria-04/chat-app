@@ -32,3 +32,7 @@ export type UpdateProfileImgType = {
   _id: string;
   profileImg: string;
 };
+
+export type UserChat = {
+  
+}

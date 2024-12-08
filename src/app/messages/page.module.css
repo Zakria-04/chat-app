@@ -1,0 +1,11 @@
+.chatContainer {
+  border: 1px solid #fff;
+  width: max-content;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+#message {
+  color: #fff;
+}
